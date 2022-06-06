@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "978528962246",
+    "project_id": "blago-da909",
+    "storage_bucket": "blago-da909.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978528962246:android:a9d9d91cd1de5a273c39c7",
+        "android_client_info": {
+          "package_name": "com.blago"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978528962246-gu6ruber0nsqlnsluoeajrama4m0hlu2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEZNbmFD8kbMpJ_5mVOgkPpOXaeh2mAgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978528962246-gu6ruber0nsqlnsluoeajrama4m0hlu2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
