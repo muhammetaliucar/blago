@@ -25,12 +25,12 @@ const OnBoardScreen = () => {
     {
       title: 'Lets Blog',
       body: 'Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.',
-      imgUrl: require('../assets/images/onboard3.png'),
+      imgUrl: require('../assets/images/onboard3.jpg'),
     },
     {
       title: 'Be Mobile',
       body: 'Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.',
-      imgUrl: require('../assets/images/onboard4.png'),
+      imgUrl: require('../assets/images/onboard4.jpg'),
     },
   ];
 

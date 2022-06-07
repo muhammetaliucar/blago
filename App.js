@@ -1,9 +1,11 @@
-import React from 'react';
-import {Image} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {LogBox} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+import auth from '@react-native-firebase/auth';
 
 import {Colors} from './src/styles/colors';
 import FlashMessage from 'react-native-flash-message';
@@ -12,13 +14,25 @@ import OnBoardScreen from './src/pages/OnBoardScreen';
 import SignPage from './src/pages/auth/SignPage';
 import LoginPage from './src/pages/auth/LoginPage';
 import HomePage from './src/pages/Home';
+import MyProfile from './src/pages/MyProfile';
 import SplashScreen from './src/pages/SplashScreen';
 
 import CustomBottomTab from './src/components/CustomBottomTab';
 
+LogBox.ignoreLogs([
+  "ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.",
+]);
+
 const App = () => {
   const Stack = createStackNavigator();
   const BottomTabNav = createBottomTabNavigator();
+  const [userSession, setUserSession] = useState();
+
+  useEffect(() => {
+    auth().onAuthStateChanged(user => {
+      setUserSession(!!user);
+    });
+  }, []);
 
   const BottomTab = () => {
     return (
@@ -26,6 +40,7 @@ const App = () => {
         screenOptions={{headerShown: false}}
         tabBar={props => <CustomBottomTab {...props} />}>
         <BottomTabNav.Screen name="Home" component={HomePage} />
+        <BottomTabNav.Screen name="MyProfile" component={MyProfile} />
       </BottomTabNav.Navigator>
     );
   };
@@ -55,28 +70,12 @@ const App = () => {
         initialRouteName="SplashScreen"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="AuthStack" component={AuthStack} />
-        <Stack.Screen
-          options={{
-            headerShown: true,
-            headerTitleAlign: 'center',
-            headerTintColor: 'white',
-            headerTitle: props => (
-              <Image
-                source={require('./src/assets/images/logo.png')}
-                style={{
-                  tintColor: 'white',
-                  resizeMode: 'contain',
-                  width: 100,
-                  height: 100,
-                }}
-              />
-            ),
-            headerStyle: {backgroundColor: Colors.primary},
-          }}
-          name="HomePage"
-          component={BottomTab}
-        />
+
+        {!userSession ? (
+          <Stack.Screen name="AuthStack" component={AuthStack} />
+        ) : (
+          <Stack.Screen name="HomePage" component={BottomTab} />
+        )}
       </Stack.Navigator>
       <FlashMessage position="top" />
     </NavigationContainer>

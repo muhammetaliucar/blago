@@ -2,8 +2,10 @@ import React from 'react';
 import {View, Text, Dimensions, TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Colors} from '../styles/colors';
+import {useNavigation} from '@react-navigation/native';
+const CustomBottomTab = ({state}) => {
+  const navigation = useNavigation();
 
-const CustomBottomTab = () => {
   return (
     <View
       style={{
@@ -11,22 +13,28 @@ const CustomBottomTab = () => {
         padding: 10,
         backgroundColor: Colors.primary,
         justifyContent: 'space-evenly',
-        position: 'absolute',
-        bottom: 10,
-        left: 20,
-        right: 20,
-        borderRadius: 20,
-        elevation: 10,
       }}>
-      <TouchableOpacity>
-        <AntDesign name="home" size={32} color="white" />
-      </TouchableOpacity>
+      {state.index === 0 ? (
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <AntDesign name="home" size={32} color={Colors.secondary} />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <AntDesign name="home" size={32} color="white" />
+        </TouchableOpacity>
+      )}
       <TouchableOpacity>
         <AntDesign name="search1" size={32} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity>
-        <AntDesign name="user" size={32} color="white" />
-      </TouchableOpacity>
+      {state.index === 1 ? (
+        <TouchableOpacity onPress={() => navigation.navigate('MyProfile')}>
+          <AntDesign name="user" size={32} color={Colors.secondary} />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={() => navigation.navigate('MyProfile')}>
+          <AntDesign name="user" size={32} color="white" />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

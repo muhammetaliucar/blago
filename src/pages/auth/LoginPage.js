@@ -31,7 +31,6 @@ const LoginPage = () => {
         message: 'Login Succesfull',
         type: 'success',
       });
-      navigation.reset({routes: [{name: 'HomePage'}]});
     } catch (error) {
       showMessage({
         message: 'Error',

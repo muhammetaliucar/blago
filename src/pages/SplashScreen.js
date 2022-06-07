@@ -1,13 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Image, SafeAreaView, Dimensions} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 const SplashScreen = () => {
   const navigation = useNavigation();
+  const [userSession, setUserSession] = useState();
 
+  useEffect(() => {
+    auth().onAuthStateChanged(user => {
+      setUserSession(!!user);
+    });
+  }, []);
   setTimeout(() => {
-    navigation.navigate('AuthStack');
-  }, 3000);
+    {
+      !userSession
+        ? navigation.navigate('AuthStack')
+        : navigation.navigate('HomePage');
+    }
+  }, 2000);
 
   return (
     <SafeAreaView>
